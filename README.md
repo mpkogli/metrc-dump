@@ -1,6 +1,6 @@
 # METRC Data Processing Tool
 
-This tool automates the process of downloading reports and manifests from the METRC system for specified licenses. It leverages Puppeteer for browser automation, allowing for headless interaction with the METRC website. The tool supports downloading various reports, handling both incoming and outgoing manifests, and can work concurrently on multiple licenses to optimize the data retrieval process.
+This tool automates the process of downloading reports and manifests from the METRC system for specified licenses. It leverages [Puppeteer](https://github.com/puppeteer/puppeteer) for browser automation, allowing for headless interaction with the METRC website. The tool supports downloading various reports, handling both incoming and outgoing manifests, and can work concurrently on multiple licenses to optimize the data retrieval process.
 
 ## Disclaimer
 
