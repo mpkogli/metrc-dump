@@ -2,6 +2,11 @@
 
 This tool automates the process of downloading reports and manifests from the METRC system for specified licenses. It leverages [Puppeteer](https://github.com/puppeteer/puppeteer) for browser automation, allowing for headless interaction with the METRC website. The tool supports downloading various reports, handling both incoming and outgoing manifests, and can work concurrently on multiple licenses to optimize the data retrieval process.
 
+## A Note for Non-Technical Folks
+
+Hey there! 🌟 If you're navigating the complexities of METRC and feeling a bit overwhelmed, you're not alone. Whether you're trying to make the most of this METRC Dump Tool or you're diving deeper into the broader METRC API for your business needs, I'm here to help. Please reach out to me at [matt@panoble.com](matt@panoble.com) for any METRC consulting needs.
+
+
 ## Disclaimer
 
 The use of this software and how it interacts with the METRC system has not been explicitly reviewed against the METRC Terms of Service (TOS). As such, I cannot provide assurance regarding compliance with METRC's TOS. This tool is provided for your convenience, and you are responsible for its use. I take no responsibility for any consequences that may arise due to the misuse of this software or any violations of the METRC TOS. It is your data to manage as you see fit. If you are managing a large number of licenses, it is advised not to adjust the CONCURRENT_SESSIONS variable to a level that may cause discomfort or potential issues with METRC's system limitations.
@@ -20,12 +25,13 @@ This is a work in progress, and has only been tested with a limited number of li
 
 ## Prerequisites
 
-- Node.js installed on your system.
+- [Node.js](https://nodejs.org/en/#home-downloadhead) installed on your system.
 - A METRC account with access to the required licenses.
 
 ## Setup
 
 1. **Clone the Repository**: First, clone this repository to your local machine.
+`` git clone https://github.com/mpkogli/metrc-dump.git``
 
 2. **Install Dependencies**: Navigate to the project directory and run `npm install` to install the required dependencies.
 
