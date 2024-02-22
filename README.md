@@ -2,6 +2,10 @@
 
 This tool automates the process of downloading reports and manifests from the METRC system for specified licenses. It leverages Puppeteer for browser automation, allowing for headless interaction with the METRC website. The tool supports downloading various reports, handling both incoming and outgoing manifests, and can work concurrently on multiple licenses to optimize the data retrieval process.
 
+## Disclaimer
+
+The use of this software and how it interacts with the METRC system has not been explicitly reviewed against the METRC Terms of Service (TOS). As such, I cannot provide assurance regarding compliance with METRC's TOS. This tool is provided for your convenience, and you are responsible for its use. I take no responsibility for any consequences that may arise due to the misuse of this software or any violations of the METRC TOS. It is your data to manage as you see fit. If you are managing a large number of licenses, it is advised not to adjust the CONCURRENT_SESSIONS variable to a level that may cause discomfort or potential issues with METRC's system limitations.
+
 ## Work in Progress
 
 This is a work in progress, and has only been tested with a limited number of licenses in the State of Colorado. Please feel free to submit issues and pull requests if you find any bugs or have any suggestions.
