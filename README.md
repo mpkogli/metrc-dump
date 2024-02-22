@@ -1,4 +1,4 @@
-# METRC Data Processing Tool
+# METRC Dump Data Downloader
 
 This tool automates the process of downloading reports and manifests from the METRC system for specified licenses. It leverages [Puppeteer](https://github.com/puppeteer/puppeteer) for browser automation, allowing for headless interaction with the METRC website. The tool supports downloading various reports, handling both incoming and outgoing manifests, and can work concurrently on multiple licenses to optimize the data retrieval process.
 
@@ -6,6 +6,9 @@ This tool automates the process of downloading reports and manifests from the ME
 
 Hey there! 🌟 If you're navigating the complexities of METRC and feeling a bit overwhelmed, you're not alone. Whether you're trying to make the most of this METRC Dump Tool or you're diving deeper into the broader METRC API for your business needs, I'm here to help. Please reach out to me at [matt@panoble.com](matt@panoble.com) for any METRC consulting needs.
 
+## No-Joke Shout Outs
+
+If you've come this far, you're probably familiar with the [Track & Trace Tools Chrome Extention for METRC](https://www.trackandtrace.tools). Check it out you use METRC on the daily.
 
 ## Disclaimer
 
@@ -112,7 +115,7 @@ If you need to download reports not listed in the default configuration, you can
 We welcome contributions from the community! If you have suggestions for improvements or new features, feel free to fork the repository, make your changes, and submit a pull request.
 
 ## Roadmap
-
+- Better error handling for bad authentication, and other possible errors
 - Date selection for reports and manifests
 
 ## License
