@@ -6,7 +6,7 @@ const delay = ms => new Promise(r => setTimeout(r, ms));
 
 async function waitForFileExistence(filePath) {
   while (!await fsp.access(filePath).then(() => true).catch(() => false)) {
-    await new Promise(resolve => setTimeout(resolve, 100));
+    await delay(100);
   }
 }
 
