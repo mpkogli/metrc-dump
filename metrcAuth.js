@@ -1,11 +1,9 @@
-// metrcAuth.js
 import puppeteer from 'puppeteer-extra';
 import dotenv from 'dotenv';
+import UserPreferencesPlugin from 'puppeteer-extra-plugin-user-preferences';
+import UserAgents from 'user-agents';
 
 dotenv.config();
-
-// Assuming puppeteer-extra-plugin-user-preferences is used only here
-import UserPreferencesPlugin from 'puppeteer-extra-plugin-user-preferences';
 
 puppeteer.use(
   UserPreferencesPlugin({
@@ -29,7 +27,8 @@ async function metrcLoginAndSaveCookies(state) {
   });
 
   const page = await browser.newPage();
-  await page.setUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36");
+  const userAgent = new UserAgents({ deviceCategory: 'desktop' });
+  await page.setUserAgent(userAgent.toString());
   await page.setViewport({
       width: 1920,
       height: 1080,

@@ -3,6 +3,7 @@ import fsp from 'fs/promises';
 import path from 'path';
 import { downloadManifests } from './downloadManifests.js';
 import { downloadReports } from './downloadReports.js';
+import UserAgents from 'user-agents';
 
 async function cleanupUserDataDir(dirPath) {
   await fsp.rm(dirPath, { recursive: true, force: true });
@@ -30,7 +31,8 @@ async function processLicense(license, selectedReportIdentifiers, selectedManife
   const downloadDir = `${baseDownloadDir}/${license.licenseNumber}`;
   await fsp.mkdir(downloadDir, { recursive: true });
 
-  await page.setUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36");
+  const userAgent = new UserAgents({ deviceCategory: 'desktop' });
+  await page.setUserAgent(userAgent.toString());
   await session.send('Page.setDownloadBehavior', {
     behavior: 'allow',
     downloadPath: downloadDir,

@@ -15,6 +15,7 @@
         "json": "^11.0.0",
         "node-fetch-cookies": "^2.0.4",
         "puppeteer-extra": "^3.3.6",
-        "puppeteer-extra-plugin-user-preferences": "^2.4.1"
+        "puppeteer-extra-plugin-user-preferences": "^2.4.1",
+        "user-agents": "^1.1.127"
     }
 }
