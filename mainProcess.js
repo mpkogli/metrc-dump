@@ -70,6 +70,7 @@ async function mainProcess() {
     { name: 'Packages Adjustments Report', identifier: 'PackagesAdjustments_report' },
     { name: 'Sales Transactions Report', identifier: 'SalesTransactions_report' },
     { name: 'Packages Sales Report', identifier: 'PackagesSales_report' },
+    { name: 'Harvests Report', identifier: 'Harvests_report' },
   ];
 
   if (process.env.DOWNLOAD_REPORTS?.toLowerCase() === 'all') {
@@ -89,6 +90,8 @@ async function mainProcess() {
           return 'SalesTransactions_report';
         case 'PackagesSales':
           return 'PackagesSales_report';
+        case 'Harvests':
+          return 'Harvests_report';
         default:
           return null;
       }

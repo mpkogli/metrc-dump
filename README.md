@@ -85,6 +85,7 @@ You can download the following reports for each license:
 - **Packages Adjustments Report**
 - **Sales Transactions Report**
 - **Packages Sales Report**
+- **Harvests Report**
 
 Manifests can be downloaded based on the direction specified (`incoming`, `outgoing`, or `all`).
 
@@ -95,7 +96,7 @@ Ensure your `.env` file is correctly set up with all necessary configurations:
 - `METRC_STATE`: The state abbreviation for your METRC account (i.e. `CO` or `CA`)
 - `METRC_USERNAME`, `METRC_PASSWORD`, `METRC_EMAIL`: Your login credentials.
 - `METRC_LICENSES`: Specify `all` to process all available licenses or list specific license numbers separated by commas.
-- `DOWNLOAD_REPORTS`: Specify `all` to download all available reports, or list comma separated values including `Transfers`, `LabResults`, `PackagesAdjustments`, `SalesTransactions` and `PackagesSales`
+- `DOWNLOAD_REPORTS`: Specify `all` to download all available reports, or list comma separated values including `Transfers`, `LabResults`, `PackagesAdjustments`, `SalesTransactions`, `PackagesSales` and `Harvests`
 - `DOWNLOAD_MANIFESTS`: Specify `all` to download all available reports/manifests or list specific types.
 - `CONCURRENT_SESSIONS`: The number of browser instances to run concurrently. Adjust based on your system's capabilities. Don't set too high or risk running into rate limits.
 - `BASE_DOWNLOAD_DIRECTORY`: The path to the directory where downloaded files will be stored.
