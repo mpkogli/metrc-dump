@@ -6,26 +6,46 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 async function mainProcess() {
-  let state = process.env.METRC_STATE?.toLowerCase();
-  if (!state) {
-    const input = await inquirer.prompt([
-      {
-        type: 'input',
-        name: 'state',
-        message: 'Enter your state\'s two character abbreviation (e.g., co, mo, ks):',
-        validate: function(value) {
-          if (value.match(/^[a-z]{2}$/i)) {
-            return true;
-          }
-          return 'Please enter a valid two character state abbreviation.';
-        },
-      }
-    ]);
-    state = input.state.toLowerCase();
-  }
+  let state = process.env.METRC_STATE?.toLowerCase() || await getState();
 
   await getCredentials();
   let { cookies: metrcCookies, licenses } = await metrcLoginAndSaveCookies(state);
+
+  licenses = await handleLicenseSelection(licenses);
+  const selectedReportIdentifiers = await getSelectedReportIdentifiers();
+  const selectedManifestDirections = await getSelectedManifestDirections();
+
+  await processSelectedItems(licenses, selectedReportIdentifiers, selectedManifestDirections, state, metrcCookies);
+}
+
+async function getState() {
+  const input = await inquirer.prompt([{
+    type: 'input',
+    name: 'state',
+    message: 'Enter your state\'s two character abbreviation (e.g., co, mo, ks):',
+    validate: value => value.match(/^[a-z]{2}$/i) ? true : 'Please enter a valid two character state abbreviation.',
+  }]);
+  return input.state.toLowerCase();
+}
+
+async function getCredentials() {
+  const requiredCredentials = ['METRC_USERNAME', 'METRC_PASSWORD', 'METRC_EMAIL'];
+  const missingCredentials = requiredCredentials.filter(c => !process.env[c]);
+
+  if (missingCredentials.length > 0) {
+    const questions = missingCredentials.map(c => ({
+      type: c === 'METRC_PASSWORD' ? 'password' : 'input',
+      name: c,
+      message: `Please enter your ${c}:`,
+      mask: '*',
+    }));
+
+    const answers = await inquirer.prompt(questions);
+    process.env = { ...process.env, ...answers };
+  }
+}
+
+async function handleLicenseSelection(licenses) {
   if (process.env.METRC_LICENSES && process.env.METRC_LICENSES.toLowerCase() === 'all') {
     console.log('Using all available licenses.');
   } else if (process.env.METRC_LICENSES) {
@@ -62,7 +82,10 @@ async function mainProcess() {
 
     licenses = answers.selectedLicenses;
   }
+  return licenses;
+}
 
+async function getSelectedReportIdentifiers() {
   let selectedReportIdentifiers = [];
   const availableReports = [
     { name: 'Transfers Report', identifier: 'Transfers_report' },
@@ -119,7 +142,10 @@ async function mainProcess() {
       selectedReportIdentifiers = reportAnswers.selectedReports;
     }
   }
+  return selectedReportIdentifiers;
+}
 
+async function getSelectedManifestDirections() {
   let selectedManifestDirections = [];
   if (process.env.DOWNLOAD_MANIFESTS?.toLowerCase() === 'false') {
     selectedManifestDirections = [];
@@ -142,7 +168,10 @@ async function mainProcess() {
     ]);
     selectedManifestDirections = manifestDirectionAnswer.selectedManifestDirections;
   }
+  return selectedManifestDirections;
+}
 
+async function processSelectedItems(licenses, selectedReportIdentifiers, selectedManifestDirections, state, metrcCookies) {
   const concurrentSessions = Math.max(Number(process.env.CONCURRENT_SESSIONS) || 2, 2);
   const processPromises = [];
   const executingPromises = new Set();
@@ -162,22 +191,6 @@ async function mainProcess() {
   }
 
   await Promise.all(processPromises);
-}
-
-async function getCredentials() {  const requiredCredentials = ['METRC_USERNAME', 'METRC_PASSWORD', 'METRC_EMAIL'];
-  const missingCredentials = requiredCredentials.filter(c => !process.env[c]);
-
-  if (missingCredentials.length > 0) {
-    const questions = missingCredentials.map(c => ({
-      type: c == 'METRC_PASSWORD' ? 'password': 'input',
-      name: c,
-      message: `Please enter your ${c}:`,
-      mask: c == 'METRC_PASSWORD' ? '*': undefined,
-    }));
-
-    const answers = await inquirer.prompt(questions);
-    process.env = { ...process.env, ...answers };
-  }
 }
 
 export default mainProcess;
