@@ -1,6 +1,22 @@
 {
     "name": "metrc-dump",
+    "description": "Local backups for all of your important METRC data",
     "main": "index.mjs",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/mpkogli/metrc-dump.git"
+    },
+    "keywords": [
+        "metrc",
+        "backup",
+        "cannabis"
+    ],
+    "author": "Matt Koglin",
+    "license": "MIT",
+    "bugs": {
+    "url": "https://github.com/mpkogli/metrc-dump/issues"
+    },
+    "homepage": "https://github.com/mpkogli/metrc-dump#readme",
     "type": "module",
     "devDependencies": {
         "puppeteer": "20.7.3"
