@@ -14,7 +14,7 @@
     "author": "Matt Koglin",
     "license": "MIT",
     "bugs": {
-    "url": "https://github.com/mpkogli/metrc-dump/issues"
+        "url": "https://github.com/mpkogli/metrc-dump/issues"
     },
     "homepage": "https://github.com/mpkogli/metrc-dump#readme",
     "type": "module",
