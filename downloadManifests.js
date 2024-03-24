@@ -41,19 +41,31 @@ async function downloadManifests(page, license, downloadDir, direction, state) {
     console.log(`Page: ${currentPage}/${totalPages} for ${direction} transfers of license ${license.licenseNumber}`);
 
     for (const manifest of manifests) {
+
+      // Skip voided income manifests
+    if (direction == 'incoming' && await manifest.$eval('td:nth-child(15)', td => td.innerText.trim() === "Yes")) {
+      console.log('Skipping voided manifest');
+      continue;
+    }
+
       let manifestNum = await manifest.$eval('td:nth-child(2)', el => el.innerText.trim());
 
       if (!await fsp.access(`${manifestDir}/${manifestNum}.pdf`).then(() => true).catch(() => false)) {
+        console.log(`Downloading manifest ${manifestNum} for ${direction} transfers of license ${license.licenseNumber}`);
         await manifest.click();
         await page.click("#viewmanifest-btn");
         await waitForFileExistence(`${downloadDir}/TransferManifest.pdf`);
         await fsp.rename(`${downloadDir}/TransferManifest.pdf`, `${manifestDir}/${manifestNum}.pdf`);
+      }
+      else {
+        console.log(`Manifest ${manifestNum} for ${direction} transfers of license ${license.licenseNumber} already downloaded`);
       }
     }
 
     await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
     disabled = await page.$(`div#${direction}Inactive-grid .k-grid-pager a[title="Go to the next page"].k-state-disabled`) !== null;
     if (!disabled) {
+      console.log(`Clicking next page for ${direction} transfers of license ${license.licenseNumber}`);
       await page.click(`div#${direction}Inactive-grid .k-grid-pager a[title="Go to the next page"]`);
       await page.waitForNetworkIdle();
       await delay(1500);
