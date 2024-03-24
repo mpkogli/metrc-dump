@@ -20,6 +20,7 @@ async function downloadReports(page, license, downloadDir, selectedReportIdentif
       'SalesTransactions_report': `https://${state}.metrc.com/reports/salestransactions?id=${license.licenseId}&start=${startDate}&end=${endDate}&includeHistory=true&format=csv`,
       'PackagesSales_report': `https://${state}.metrc.com/reports/packagessales?id=${license.licenseId}&start=${startDate}&end=${endDate}&format=csv`,
       'Harvests_report': `https://${state}.metrc.com/reports/harvests?id=${license.licenseId}&start=${startDate}&end=${endDate}&format=csv`,
+      'PlantsTrend_report': `https://${state}.metrc.com/reports/plantstrend?id=${license.licenseId}&start=${startDate}&end=${endDate}&format=csv`,
     };
 
     let url = reportUrlTemplates[identifier];

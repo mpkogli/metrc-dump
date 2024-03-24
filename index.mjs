@@ -94,6 +94,7 @@ async function getSelectedReportIdentifiers() {
     { name: 'Sales Transactions Report', identifier: 'SalesTransactions_report' },
     { name: 'Packages Sales Report', identifier: 'PackagesSales_report' },
     { name: 'Harvests Report', identifier: 'Harvests_report' },
+    { name: 'Plants Trend Report', identifier: 'PlantsTrend_report' },
   ];
 
   if (process.env.DOWNLOAD_REPORTS?.toLowerCase() === 'all') {
@@ -115,6 +116,8 @@ async function getSelectedReportIdentifiers() {
           return 'PackagesSales_report';
         case 'Harvests':
           return 'Harvests_report';
+        case 'PlantsTrend':
+          return 'PlantsTrend_report';
         default:
           return null;
       }
